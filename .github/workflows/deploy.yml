@@ -22,7 +22,7 @@ jobs:
 
       - name: Run main.py and check output
         env:
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          HOMESERVER: ${{ secrets.HOMESERVER }}
         run: |
           timeout 10 python -u main.py > output.txt 2>&1 || EXIT_CODE=$?
           if [ "${EXIT_CODE}" != "" ] && [ "${EXIT_CODE}" != "124" ]; then

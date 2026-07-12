@@ -12,7 +12,7 @@ Pour ajouter un groupe de sous-commandes :
 3. ajoute `from . import mon_groupe` ci-dessous
 """
 
-from . import ping
+from . import pat
 from . import echo
 from . import shutdown
 from . import hierarchy

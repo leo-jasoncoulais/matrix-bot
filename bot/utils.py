@@ -1,3 +1,5 @@
+from io import BytesIO
+
 from bot import state
 
 
@@ -18,7 +20,12 @@ async def send(room_id, text):
 async def send_image(room_id, data, content_type="image/gif", filename="image.gif"):
     """Upload un fichier image sur le serveur Matrix puis l'envoie dans la salle."""
     try:
-        resp = await state.client.upload(data, content_type=content_type, filename=filename)
+        resp, _ = await state.client.upload(
+            BytesIO(data),
+            content_type=content_type,
+            filename=filename,
+            filesize=len(data),
+        )
         if hasattr(resp, "content_uri"):
             await state.client.room_send(
                 room_id=room_id,

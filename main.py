@@ -27,12 +27,12 @@ async def main():
     client.add_event_callback(handlers.invite_callback, InviteMemberEvent)
     client.add_response_callback(handlers.sync_response_callback, SyncResponse)
 
+    # On ne traite que les messages envoyés après ce point (ignore l'historique)
+    handlers.start_time_ms = int(time.time() * 1000)
+
     # Premier sync pour peupler le device_store, puis on fait confiance aux appareils
     await client.sync(timeout=30000, full_state=True)
     trust_all_devices()
-
-    # On ne traite que les messages envoyés après ce point (ignore l'historique)
-    handlers.start_time_ms = int(time.time() * 1000)
 
     print("Bot en écoute...")
     await client.sync_forever(timeout=30000)

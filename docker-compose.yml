@@ -1,16 +1,15 @@
 services:
-  discord-bot:
+  matrix-bot:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nit/discord-bot
+    image: nit/matrix-bot
     container_name: paco
     user: "1001:1001"
     env_file:
       - .env
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./res:/app/res
     group_add:
       - "${DOCKER_GID}"
     restart: always

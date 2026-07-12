@@ -5,7 +5,9 @@
 ```
 matrix-bot/
 ├── main.py                 # point d'entrée
-├── config.py                # configuration (homeserver, identifiants, admins)
+├── config.py                # configuration (homeserver, identifiants)
+├── admins.json              # liste des IDs admin
+├── .env                     # variables d'environnement
 ├── requirements.txt
 └── bot/
     ├── state.py              # référence globale au client Matrix
@@ -18,7 +20,15 @@ matrix-bot/
         ├── __init__.py          # importe chaque commande pour l'enregistrer
         ├── ping.py
         ├── echo.py
-        └── shutdown.py
+        ├── help.py
+        ├── shutdown.py
+        ├── hierarchy.py
+        ├── room_state.py
+        └── delete/
+            ├── __init__.py
+            ├── room.py
+            ├── message.py
+            └── empty.py
 ```
 
 ## Installation
@@ -31,10 +41,19 @@ pip install -r requirements.txt
 
 ## Configuration
 
-Édite `config.py` (homeserver, `USER_ID`) et exporte le mot de passe :
+1. Copie `.env.example` en `.env` et remplis les variables :
 
-```bash
-export MATRIX_BOT_PASSWORD="mon_mot_de_passe"
+```env
+HOMESERVER=matrix.org
+USER_ID=monbot
+PASSWORD=mon_mot_de_passe
+ADMIN_TOKEN=mon_token_admin
+```
+
+2. Édite `admins.json` avec la liste des user IDs admin :
+
+```json
+["@user:matrix.org"]
 ```
 
 ## Lancement

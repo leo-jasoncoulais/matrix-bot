@@ -24,7 +24,7 @@ Signed-By: /etc/apt/keyrings/docker.asc\n" \
         "$VERSION_CODENAME" "$ARCH" \
         > /etc/apt/sources.list.d/docker.sources && \
     apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg docker-ce-cli docker-compose-plugin curl zstd dos2unix libolm-dev && \
+    apt-get install -y --no-install-recommends ffmpeg docker-ce-cli docker-compose-plugin curl zstd dos2unix libolm-dev make && \
     rm -rf /var/lib/apt/lists/*
     
     

@@ -26,7 +26,8 @@ Signed-By: /etc/apt/keyrings/docker.asc\n" \
     apt-get update && \
     apt-get install -y --no-install-recommends ffmpeg docker-ce-cli docker-compose-plugin curl zstd dos2unix libolm-dev make pkg-config cmake build-essential && \
     rm -rf /var/lib/apt/lists/*
-    
+
+RUN chown appuser:appgroup /app
     
 RUN curl -fsSL https://ollama.com/install.sh | sh && \
     mkdir -p /home/appuser/.ollama && \

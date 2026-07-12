@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: nit/matrix-bot
-    container_name: paco
+    container_name: matrix-bot
     user: "1001:1001"
     env_file:
       - .env

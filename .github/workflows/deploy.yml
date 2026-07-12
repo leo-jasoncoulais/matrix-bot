@@ -23,6 +23,9 @@ jobs:
       - name: Run main.py and check output
         env:
           HOMESERVER: ${{ secrets.HOMESERVER }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          USER_ID: ${{ secrets.USER_ID }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
         run: |
           timeout 10 python -u main.py > output.txt 2>&1 || EXIT_CODE=$?
           if [ "${EXIT_CODE}" != "" ] && [ "${EXIT_CODE}" != "124" ]; then

@@ -1,7 +1,16 @@
+import aiohttp
+
 from bot.registry import command
-from bot.utils import send
+from bot.utils import send, send_image
 
 
 @command("pat", description="Verifier que le bot est en ligne")
 async def cmd_pat(room, event, args):
-    await send(room.room_id, "https://images-ext-1.discordapp.net/external/Yh1VRYl64zXqDRghL2uK4GSg-I3VWwhn3q6M_O0-tK8/https/static.klipy.com/ii/f87f46a2c5aeaeed4c68910815f73eaf/30/71/1RW0uSwf.mp4")
+    url = "https://klipy.com/gifs/cat-girl-head-pat"
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            if resp.status == 200:
+                data = await resp.read()
+                await send_image(room.room_id, data, content_type="image/gif", filename="pat.gif")
+            else:
+                await send(room.room_id, "Erreur lors du t\u00e9l\u00e9chargement du GIF.")

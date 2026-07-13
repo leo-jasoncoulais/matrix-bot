@@ -9,3 +9,4 @@ PASSWORD = os.getenv('PASSWORD')
 DEVICE_NAME = os.getenv('USER_ID')
 CREDENTIALS_FILE = "credentials.json"
 STORE_PATH = "./store"
+NOTIFY_ROOM = os.getenv('NOTIFY_ROOM')

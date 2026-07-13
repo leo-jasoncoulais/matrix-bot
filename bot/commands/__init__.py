@@ -21,3 +21,4 @@ from . import help
 from . import delete
 from . import register
 from . import delete_user
+from . import add_to_space

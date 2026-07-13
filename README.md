@@ -1,42 +1,11 @@
 # matrix-bot
 
-## Structure
-
-```
-matrix-bot/
-├── main.py                 # point d'entrée
-├── config.py                # configuration (homeserver, identifiants)
-├── admins.json              # liste des IDs admin
-├── .env                     # variables d'environnement
-├── requirements.txt
-└── bot/
-    ├── state.py              # référence globale au client Matrix
-    ├── registry.py           # registre de commandes (décorateur @command)
-    ├── utils.py               # fonctions utilitaires (envoi de message)
-    ├── crypto.py              # gestion de la confiance des appareils (E2E)
-    ├── client.py               # création/connexion du AsyncClient
-    ├── handlers.py             # callbacks d'événements (messages, invitations, chiffrement)
-    └── commands/
-        ├── __init__.py          # importe chaque commande pour l'enregistrer
-        ├── ping.py
-        ├── echo.py
-        ├── help.py
-        ├── shutdown.py
-        ├── hierarchy.py
-        ├── room_state.py
-        └── delete/
-            ├── __init__.py
-            ├── room.py
-            ├── message.py
-            └── empty.py
-```
-
 ## Installation
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+cp .env.example .env
+# Remplis le fichier .env avec tes identifiants
+docker compose up -d
 ```
 
 ## Configuration
@@ -45,9 +14,10 @@ pip install -r requirements.txt
 
 ```env
 HOMESERVER=matrix.org
-USER_ID=monbot
+USER_ID=@monbot:matrix.org
 PASSWORD=mon_mot_de_passe
 ADMIN_TOKEN=mon_token_admin
+DOCKER_GID=999
 ```
 
 2. Édite `admins.json` avec la liste des user IDs admin :
@@ -56,11 +26,7 @@ ADMIN_TOKEN=mon_token_admin
 ["@user:matrix.org"]
 ```
 
-## Lancement
-
-```bash
-python main.py
-```
+- `DOCKER_GID` : ID du groupe docker de l'hôte (obtenir avec `getent group docker`).
 
 ## Ajouter une commande
 

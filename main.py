@@ -12,7 +12,7 @@ from bot.crypto import trust_all_devices
 
 # L'import déclenche l'enregistrement de toutes les commandes
 # (voir bot/commands/__init__.py)
-import bot.commands  # noqa: F401
+import bot.commands
 
 
 async def main():
@@ -40,4 +40,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-    

@@ -66,8 +66,8 @@ class Group:
 
     async def execute(self, subcommand, room, event, args):
         if self.admin_only:
-            from config import ADMINS
-            if event.sender not in ADMINS:
+            from bot.admin import is_server_admin
+            if not is_server_admin(event.sender):
                 return
         entry = self._subcommands.get(subcommand)
         if entry:

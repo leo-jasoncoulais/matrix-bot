@@ -1,8 +1,8 @@
 import os
 import requests
+from bot.admin import is_server_admin
 from bot.registry import command
 from bot.utils import send
-from config import ADMINS
 
 HOMESERVER = os.getenv("HOMESERVER", "")
 ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "")
@@ -160,7 +160,7 @@ async def _send_lines(room_id, lines, chunk_size=4000):
 @command("hierarchy", description="Afficher l'arbre des spaces et rooms")
 async def cmd_hierarchy(room, event, args):
 
-    if event.sender not in ADMINS:
+    if not is_server_admin(event.sender):
         await send(room.room_id, f"Vous n'êtes pas administrateur de https://{HOMESERVER} !")
         return
 

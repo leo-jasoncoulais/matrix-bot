@@ -19,3 +19,5 @@ from . import hierarchy
 from . import room_state
 from . import help
 from . import delete
+from . import register
+from . import delete_user

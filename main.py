@@ -6,9 +6,11 @@ Schemas.room_create["properties"]["content"]["properties"]["predecessor"]["requi
 
 from nio import RoomMessageText, MegolmEvent, InviteMemberEvent, SyncResponse
 
+import config
 from bot import state, handlers
 from bot.client import build_client
 from bot.crypto import trust_all_devices
+from bot.utils import send
 
 # L'import déclenche l'enregistrement de toutes les commandes
 # (voir bot/commands/__init__.py)
@@ -33,6 +35,9 @@ async def main():
     # Premier sync pour peupler le device_store, puis on fait confiance aux appareils
     await client.sync(timeout=30000, full_state=True)
     trust_all_devices()
+
+    if config.NOTIFY_ROOM:
+        await send(config.NOTIFY_ROOM, "Bot redémarré")
 
     print("Bot en écoute...")
     await client.sync_forever(timeout=30000)
